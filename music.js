@@ -76,10 +76,21 @@ $(function(){
 		}
 		
 	})
-	var hidden=$(".head-zuo")
+	var hidden=$(".head-zuo").eq(0);
 	var back=$(".back")
-	hidden.on('click',function(){
+	var back1=$(".back1")
+	
+	hidden.on('touchend',function(){
 		back.addClass("move")
+		back1.css("display","block")
+		
+		
+	})
+	var head_left=$(".head-zuo").eq(1)
+	head_left.on("touchend",function(){
+		back.removeClass("move")
+		back1.css("display","none")
+		$(".lists-hidden").animate({bottom:"-5rem"},300)
 	})
 	var author=$(".author")
 //	渲染
@@ -142,15 +153,15 @@ $(function(){
 		endtime.html(format(audio.duration))
 			
 		//	随着歌曲进度条的移动
-		var width=$(".singtiao").width();
-		
+		var width=$(".singtiao").width();		
 		var move=width * audio.currentTime/audio.duration
 		progress.css("width",move);
 	})
 	
 	
+	
 //	进度拖拽
-var td=$(".singtiao")
+	var td=$(".singtiao")
 	progress.on("click",false)
 	progress.on("mousedown",function(e){
 		$(document).on("mousemove",function(e){
@@ -170,10 +181,22 @@ var td=$(".singtiao")
 //	
 	
 //	播放列表
- $(".bottom").find("img").on("touchend",function(){
+ $(".bottom").on("touchend","img",function(){
  	$(".lists-hidden").animate({bottom:0},600)
+ 	
  })
-	
+	var start;
+	$(document).on("touchstart",function(e){
+		 start=e.originalEvent.changedTouches[0].clientY;
+//		 console.log(start)
+	})
+	$(document).on("touchend",function(e){
+		 var end=e.originalEvent.changedTouches[0].clientY;
+//		 console.log(end)
+		 if(end-start>50){
+ 			$(".lists-hidden").animate({bottom:"-5rem"},600)		 	
+		 }
+	})
 	
 	
 	//	删除
@@ -213,4 +236,7 @@ var td=$(".singtiao")
 	$(audio).on("canplay",function(){           
             
    })
+	$(audio).on("ended",function(){
+		
+	})
 })

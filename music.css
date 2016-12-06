@@ -15,6 +15,7 @@ html {
 body {
   font-size: 16px;
   overflow: hidden;
+  background: #E0E2E1;
 }
 
 a {
@@ -60,23 +61,22 @@ a {
 @font-face {
   font-family: 'iconfont';
   /* project id："175462" */
-  src: url("http://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.eot");
-  src: url("http://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.eot") format("embedded-opentype"), url("http://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.woff") format("woff"), url("http://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.ttf") format("truetype"), url("http://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.svg#iconfont") format("svg");
+  src: url("https://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.eot");
+  src: url("https://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.eot") format("embedded-opentype"), url("https://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.woff") format("woff"), url("https://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.ttf") format("truetype"), url("https://at.alicdn.com/t/font_1vlc4wg7f77dgqfr.svg#iconfont") format("svg");
 }
 
 .back {
   width: 100%;
-  height: 6.67rem;
-  background: linear-gradient(to bottom, #E6E8E7, #E0E2E1);
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1000;
+  background: linear-gradient(to bottom, #E6E8E7, #E0E2E1);
 }
 
 .header {
   width: 100%;
-  height: 0.9rem;
+  height: 0.8rem;
 }
 
 .header .header-left {
@@ -331,14 +331,21 @@ a {
   height: 0.3rem;
 }
 
+@keyframes back {
+  0% {
+  }
+  100% {
+  }
+}
+
 .back1 {
   width: 100%;
-  height: 6.67rem;
   background: linear-gradient(to bottom, #E6E8E7, #E0E2E1);
   position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
+  display: none;
 }
 
 .header1 {
@@ -480,6 +487,7 @@ a {
   text-align: center;
   line-height: 0.3rem;
   color: #656464;
+  overflow: hidden;
 }
 
 .bofangtiao .starttime:first-child {
@@ -492,7 +500,7 @@ a {
 
 .bofangtiao .singtiao {
   float: left;
-  height: 0.06rem;
+  height: 0.03rem;
   width: 70%;
   background: #B4B4B4;
   border-radius: 0.4rem;
@@ -513,9 +521,30 @@ a {
 
 .bofangtiao .singtiao ul li {
   position: absolute;
-  width: 0rem;
+  width: 0.1rem;
   height: 100%;
   background: #31C27C;
+}
+
+.bofangtiao .singtiao ul li i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.bofangtiao .singtiao ul li i:after {
+  content: "";
+  float: left;
+  width: 0.15rem;
+  height: 0.15rem;
+  border-radius: 50%;
+  background: #31C27C;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 0;
 }
 
 .playnew {
@@ -612,7 +641,7 @@ a {
   height: 4rem;
   background: #1B212A;
   position: absolute;
-  bottom: -4rem;
+  bottom: -5rem;
   left: 0;
 }
 
