@@ -26,13 +26,14 @@
 $(function(){
 	var audio=$("#audio").get(0);
 	var play=$(".play1")
+    var song=$(".song")
+    song.on('click',false);
 	var music=[
 		{
 			name:"up",
 			author:"EXID",
 			src:"up.mp3",
 			img:"img/4.jpg",
-			
 		},
 		{
 			name:"Booty music",
@@ -145,7 +146,8 @@ $(function(){
 					var m=Math.floor(v/60);
 					return m + ":" + s;
 	}	
-	var progress=$(".bofangtiao .singtiao ul li")	
+	var progress=$(".bofangtiao .singtiao ul li")
+    console.log( progress)
 	$(audio).on("timeupdate",function(){
 		var starttime=$(".starttime").eq(0);
 		var endtime=$(".starttime").eq(1);		
@@ -153,31 +155,65 @@ $(function(){
 		endtime.html(format(audio.duration))
 			
 		//	随着歌曲进度条的移动
-		var width=$(".singtiao").width();		
-		var move=width * audio.currentTime/audio.duration
-		progress.css("width",move);
-	})
+	var width=$(".singtiao").width();
+    var move=width * audio.currentTime/audio.duration
+    progress.css("width",move);
+})
 	
 	
 	
 //	进度拖拽
-	var td=$(".singtiao")
-	progress.on("click",false)
-	progress.on("mousedown",function(e){
-		$(document).on("mousemove",function(e){
-			var width=progress.width();
-			var c=width/td.width()*audio.duration;
-			console.log(width,c)
-			if(c>=audio.duration||c<=0){
-				return;
-			}
-			audio.currentTime=c;	
-		})
-		return false;
-	})
-//	$(document).on("mouseup",function(){
-//		$(document).off("mousemove");
-//	})	
+    var tzs=$(".singtiao")
+    var cir=$(".singtiao").find(".i")
+	tzs.on("touchstart",function(e){
+        var offsetX=e.originalEvent.changedTouches[0].clientX -tzs.offset().left;
+        var ir=cir.width()/2;
+        // console.log(offsetX)
+        var start= ir - offsetX;
+	    $(document).on('touchstart',function(e){
+            var left=e.originalEvent.changedTouches[0].clientX - progress.position().left +start;
+            var c= left/progress.width()*audio.duration;
+            if(c>=audio.duration || c<=0){
+                return;
+            }
+            audio.currentTime =c;
+            console.log(c)
+            console.log(left)
+            // console.log(progress)
+        })
+        return false;
+    })
+
+    $(document).on("touchend",function(){
+        $(document).off("touchmove")
+    });
+
+
+    tzs.on("touchend",function(e){
+        var offsetX=e.originalEvent.changedTouches[0].clientX -tzs.offset().left+cir.width()/2;
+        console.log(tzs.offset().left)
+        audio.currentTime=offsetX/ tzs.width()*audio.duration;
+
+
+    });
+    tzs.on("touchend",false)
+// 	var td=$(".singtiao")
+// 	progress.on("click",false)
+// 	progress.on("mousedown",function(e){
+// 		$(document).on("mousemove",function(e){
+// 			var width=progress.width();
+// 			var c=width/td.width()*audio.duration;
+// 			console.log(width,c)
+// 			if(c>=audio.duration||c<=0){
+// 				return;
+// 			}
+// 			audio.currentTime=c;
+// 		})
+// 		return false;
+// 	})
+// 	$(document).on("mouseup",function(){
+//         $(document).off("mousemove");
+//     })
 //	
 	
 //	播放列表
